@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="flickrSearch">
+
+<head>
+	<title>Flickr Search</title>
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/javascript" src="app.js"></script>
+</head>
+
+<body ng-controller="flickrController">
+	<header>
+		<h1 class="text-center">Flickr Searcher</h1>
+	</header>
+
+	<!-- search bar -->
+	<div class="container">
+        <div class="row">
+            <div class="search-bar">
+                <form ng-submit="submitSearch()">
+                    <input type="text" name="searchTerm" placeholder="Enter a tag to search for" ng-model="searchTerm"  required/>
+                    <input type="submit" name="submit">
+                </form>
+                <span ng-show="isSearching" class="text-center">Searching flickr for pictures tagged with {{searchTerm}}</span>
+            </div>
+        </div>
+		<!-- content -->
+				<div ng-repeat="picture in results.photos.photo">
+                    <div class="col-sm-3">
+                        <a href="https://farm{{picture.farm-id}}.staticflickr.com/{{picture.server-id}}/{{picture.id}}_{{picture.secret}}.jpg">
+                            <img class="img-responsive result-img center-block" src="https://farm{{picture.farm-id}}.staticflickr.com/{{picture.server-id}}/{{picture.id}}_{{picture.secret}}.jpg">
+                        </a>
+                            <p>{{picture.title}}</p>
+                    </div>
+                </div>
+	</div>
+</body>
+</html>
